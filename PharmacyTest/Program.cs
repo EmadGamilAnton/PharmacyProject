@@ -11,13 +11,13 @@ namespace PharmacyTest
         static void Main(string[] args)
         {
             var context = new testEntityEntities();
-            var cust = new customer()
-            {
-                cust_id = 3,
-                cust_address = "Address test"
-            };
-            context.customers.Add(cust);
-            context.SaveChanges();
+
+            foreach(customers cust in context.customers.ToList()){
+                Console.Write("Customer ID : {0}, Name: {1}, Address: {2}, Phone: {3}"
+                    , cust.cust_id, cust.cust_name, cust.cust_address, cust.cust_mobileno);
+                Console.ReadLine();
+            }
+            
         }
     }
 }
