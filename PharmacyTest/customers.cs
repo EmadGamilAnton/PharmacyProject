@@ -12,7 +12,7 @@ namespace PharmacyTest
     using System;
     using System.Collections.Generic;
     
-    public partial class customer
+    public partial class customers
     {
         public int cust_id { get; set; }
         public string cust_name { get; set; }

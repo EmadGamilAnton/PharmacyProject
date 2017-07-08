@@ -12,7 +12,8 @@ namespace PharmacyTest
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    /*Very important to force MySQL*/
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public partial class testEntityEntities : DbContext
     {
         public testEntityEntities()
@@ -25,6 +26,6 @@ namespace PharmacyTest
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<customer> customers { get; set; }
+        public virtual DbSet<customers> customers { get; set; }
     }
 }
