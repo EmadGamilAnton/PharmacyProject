@@ -1,0 +1,11 @@
+CREATE DATABASE testEntity ;
+
+CREATE TABLE customers (
+cust_id INT NOT NULL,
+  cust_name VARCHAR(45) NULL,
+  cust_address VARCHAR(45) NULL,
+  cust_mobileno INT NULL,
+  PRIMARY KEY (cust_id));
+)
+
+  
