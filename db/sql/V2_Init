@@ -1,0 +1,80 @@
+USE master ;  
+GO  
+CREATE DATABASE pharmacydbb ;
+
+
+
+CREATE TABLE [dbo].[bill] (
+    [bill_id]   INT          NOT NULL,
+    [sub_total] VARCHAR (50) NULL,
+    [discount]  FLOAT (53)   NULL,
+    [total]     FLOAT (53)   NULL,
+    [staff_id]  INT          NULL,
+    CONSTRAINT [PK_Bill] PRIMARY KEY CLUSTERED ([bill_id] ASC),
+    CONSTRAINT [FK_bill_staff] FOREIGN KEY ([staff_id]) REFERENCES [dbo].[staff] ([staff_id]) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE [dbo].[customers] (
+    [cust_id]       INT          NOT NULL,
+    [cust_name]     VARCHAR (50) NULL,
+    [cust_address]  VARCHAR (50) NULL,
+    [cust_mobileno] INT          NULL,
+    CONSTRAINT [PK_customers] PRIMARY KEY CLUSTERED ([cust_id] ASC)
+);
+
+CREATE TABLE [dbo].[expenses] (
+    [ext_id]       INT          NOT NULL,
+    [ext_category] VARCHAR (50) NULL,
+    [ext_date]     VARCHAR (50) NULL,
+    [ext_amount]   FLOAT (53)   NULL,
+    CONSTRAINT [PK_expenses] PRIMARY KEY CLUSTERED ([ext_id] ASC)
+);
+
+CREATE TABLE [dbo].[med_category] (
+    [med_barcode]     INT NOT NULL,
+    [med_category_id] INT NULL,
+    CONSTRAINT [PK_med_category] PRIMARY KEY CLUSTERED ([med_barcode] ASC)
+);
+
+CREATE TABLE [dbo].[medicine] (
+    [med_barcode]        INT          NOT NULL,
+    [med_name]           VARCHAR (50) NULL,
+    [med_purshase_price] FLOAT (53)   NULL,
+    [med_selling_price]  FLOAT (53)   NULL,
+    [med_quantity]       INT          NULL,
+    [med_generic_name]   VARCHAR (50) NULL,
+    [med_type]           VARCHAR (50) NULL,
+    [med_ex_date]        DATE         NULL,
+    [med_location]       VARCHAR (50) NULL,
+    [sup_id]             INT          NULL,
+    CONSTRAINT [PK_medicine] PRIMARY KEY CLUSTERED ([med_barcode] ASC),
+    CONSTRAINT [FK_medicine_med_category] FOREIGN KEY ([med_barcode]) REFERENCES [dbo].[med_category] ([med_barcode]) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT [FK_medicine_supplier] FOREIGN KEY ([sup_id]) REFERENCES [dbo].[supplier] ([sup_id]) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE [dbo].[staff] (
+    [staff_id]      INT          NOT NULL,
+    [staff_name]    VARCHAR (50) NULL,
+    [staff_salary]  FLOAT (53)   NULL,
+    [staff_phone]   INT          NULL,
+    [staff_address] VARCHAR (50) NULL,
+    [staff_email]   VARCHAR (50) NULL,
+    [staff_role]    VARCHAR (50) NULL,
+    CONSTRAINT [PK_staff] PRIMARY KEY CLUSTERED ([staff_id] ASC)
+);
+
+CREATE TABLE [dbo].[sup_mobile_no] (
+    [sup_id]        INT NOT NULL,
+    [sup_mobile_no] INT NULL,
+    CONSTRAINT [PK_sup_mobile_no] PRIMARY KEY CLUSTERED ([sup_id] ASC),
+    CONSTRAINT [FK_sup_mobile_no_supplier] FOREIGN KEY ([sup_id]) REFERENCES [dbo].[supplier] ([sup_id]) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE [dbo].[supplier] (
+    [sup_id]      INT          NOT NULL,
+    [sup_name]    VARCHAR (50) NULL,
+    [sup_email]   VARCHAR (50) NULL,
+    [sup_address] VARCHAR (50) NULL,
+    CONSTRAINT [PK_supplier] PRIMARY KEY CLUSTERED ([sup_id] ASC)
+);
+
